@@ -1,0 +1,53 @@
+<h3 class="page-heading">Mercury DB Connection</h3>
+
+<div class="gf-form-group">
+		<div class="gf-form">
+			<span class="gf-form-label width-9">Server URL</span>
+			<input class="gf-form-input width-30" type="text" ng-model='ctrl.current.jsonData.serverUrl' placeholder="http://localhost:8080"></input>
+      <info-popover mode="right-absolute">
+          <p>Server URL.</p>
+      </info-popover>
+    </div>
+
+    <div class="gf-form-inline">
+        <div class="gf-form">
+            <span class="gf-form-label width-9">Resource Owner</span>
+            <input class="gf-form-input width-30" type="text" ng-model='ctrl.current.jsonData.username' placeholder="admin"></input>
+        </div>
+        <div class="gf-form">
+            <input class="gf-form-input" type="password" ng-model='ctrl.current.secureJsonData.ownerPassword' placeholder="password"></input>
+        </div>
+    </div>
+
+    <div class="gf-form">
+			<span class="gf-form-label width-9">Client ID</span>
+			<input class="gf-form-input width-30" type="text" ng-model='ctrl.current.jsonData.clientId' placeholder=""></input>
+      <info-popover mode="right-absolute">
+          <p>Client identyfication.</p>
+      </info-popover>
+    </div>
+
+    <div class="gf-form">
+			<span class="gf-form-label width-9">Client secret</span>
+			<input class="gf-form-input width-30" type="text" ng-model='ctrl.current.jsonData.clientSecret' placeholder=""></input>
+      <info-popover mode="right-absolute">
+          <p>Client secret.</p>
+      </info-popover>
+    </div>
+
+    <div class="gf-form">
+			<span class="gf-form-label width-9">Access Token URI</span>
+			<input class="gf-form-input width-30" type="text" ng-model='ctrl.current.jsonData.accesTokenURI' placeholder=""></input>
+      <info-popover mode="right-absolute">
+          <p>Access token URI</p>
+      </info-popover>
+    </div>
+
+    <div class="gf-form">
+			<span class="gf-form-label width-9">Scope</span>
+			<input class="gf-form-input width-30" type="text" ng-model='ctrl.current.jsonData.scope' placeholder=""></input>
+      <info-popover mode="right-absolute">
+          <p>Scope</p>
+      </info-popover>
+    </div>
+</div>

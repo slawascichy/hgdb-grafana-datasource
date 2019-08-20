@@ -1,0 +1,48 @@
+{
+  "type": "datasource",
+  "name": "Mercury DB Grafana Datasource",
+  "id": "sci-hgdb-grafana-datasource",
+
+  "info": {
+    "description": "Datasource for Mercury DB",
+    "author": {
+      "name": "Sławomir Cichy",
+      "url": "https://scisoftware.pl/"
+    },
+    "keywords": ["searchable", "key", "words"],
+    "logos": {
+      "small": "img/logo_48x48.png",
+      "large": "img/logo_690x690.png"
+    },
+    "links": [
+      {"name": "Project site", "url": "https://github.com/slawascichy/hgdb-grafana-datasource"},
+      {"name": "Apache License", "url": "https://github.com/slawascichy/hgdb-grafana-datasource/blob/master/LICENSE"}
+    ],
+    "version": "%VERSION%",
+    "updated": "%TODAY%"
+  },
+  "routes": [
+    {
+      "path": "mercurydb",
+      "url": "{{.JsonData.serverUrl}}",
+      "tokenAuth": {
+        "url": "{{.JsonData.accesTokenURI}}",
+        "params": {
+          "grant_type": "password",
+          "username": "{{.JsonData.username}}",
+          "password": "{{.SecureJsonData.ownerPassword}}",
+          "client_id": "{{.JsonData.clientId}}",
+          "client_secret": "{{.JsonData.clientSecret}}",
+          "scope": "{{.JsonData.scope}}"
+        }
+      }
+    }
+  ],
+  "dependencies": {
+    "grafanaVersion": "4.5.x",
+    "plugins": [ ]
+  },
+
+  "metrics": true,
+  "annotations": false
+}
