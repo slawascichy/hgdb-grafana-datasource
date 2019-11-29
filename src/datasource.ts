@@ -1,5 +1,3 @@
-///<reference path="../node_modules/grafana-sdk-mocks/app/headers/common.d.ts" />
-
 import _ from 'lodash';
 import ContextFactory from './io/hgdb/client/core/ContextFactory';
 import ResponseParser from './io/hgdb/client/query/ResponseParser';
@@ -44,17 +42,19 @@ export default class HgDBDatasource {
 
     for (let target of options.targets) {
       if (target.type == 'fieldMetricQuery') {
-        seriesList.push(this.fieldMetricQuery(context, target, options));
+        let series = await this.fieldMetricQuery(context, target, options);
+        seriesList.push(series);
       } else if (target.type == 'dateMetricQuery') {
-        let x = await this.dateMetricQuery(context, target, options);
-        seriesList.push(x);
+        let series = await this.dateMetricQuery(context, target, options);
+        seriesList.push(series);
       } else if (target.type == 'groupByQuery') {
-        seriesList.push(this.groupByQuery(context, target, options));
+        let series = await this.groupByQuery(context, target, options);
+        seriesList.push(series);
       } else {
-        seriesList.push(this.searchByQuery(context, target, options));
+        let series = await this.searchByQuery(context, target, options);
+        seriesList.push(series);
       }
     }
-    console.log("-->seriesList", seriesList);
     return { data: seriesList };
   }
 
@@ -91,8 +91,8 @@ export default class HgDBDatasource {
     } 
     /* ustalenie przedziału czasowego - KONIEC */
     
-    var rangeFrom = ("" + optionalOptions.range.from._i).split(".")[0];
-    var rangeTo = ("" + optionalOptions.range.to._i).split(".")[0];
+    var rangeFrom = optionalOptions.range.from._d.getTime();
+    var rangeTo = optionalOptions.range.to._d.getTime();
 
     var luceneQuery = 
       "(" + target.luceneQuery + ") AND " + dateFieldName + ":[" + rangeFrom + " TO " + rangeTo + "]";
@@ -118,8 +118,7 @@ export default class HgDBDatasource {
       async: false
     })
       .then(response => {
-        if (response.status === 200) {
-
+        if (response.status === 200 && response.data.message != "NO_DATA_FOUND") {
           var dataResult = response.data.result;
           var datapointsResult = [];
           var ix = 0; 

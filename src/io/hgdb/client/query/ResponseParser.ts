@@ -8,10 +8,9 @@ export default class ResponseParser {
       return { data: res };
     }
   
-    processDateMetricQueryResult(refId: string, res: any) {
+    processDateMetricQueryResult(res: any) {
 
       console.log("-->processQueryResult: $q", this.$q);
-      console.log("-->processQueryResult: refId", refId);
       console.log("-->processQueryResult: res", res);
       return {
         target : "target.target",

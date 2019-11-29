@@ -17,7 +17,6 @@
   },
   "devDependencies": {
     "@types/lodash": "^4.14.74",
-    "grafana-sdk-mocks": "file:node_modules/grafana-sdk-mocks",
     "grunt": "^1.0.1",
     "grunt-contrib-clean": "^1.1.0",
     "grunt-contrib-copy": "^1.0.0",
