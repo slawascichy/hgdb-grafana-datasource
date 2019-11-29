@@ -27,3 +27,6 @@ export const ROOT_CONTEXT_ID = APP_NAME + "_" + APP_VERSION;
 
 export const DATE_LONG_FORMAT = "dd-MM-yyyy HH:mm:ss XXX";
 export const DATE_SHORT_FORMAT = "yyyy-MM-dd";
+
+export const DECODE_DATE_AND_LOB = "DATE_AND_LOB";
+export const DECODE_NOTHING = "NOTHING";

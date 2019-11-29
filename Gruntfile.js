@@ -53,13 +53,14 @@ module.exports = function(grunt) {
         dest: 'dist',
         options: {
           module: 'system',
-          target: 'es5',
+          target: 'es6',
           rootDir: 'dist/',
           declaration: true,
           emitDecoratorMetadata: true,
           experimentalDecorators: true,
           sourceMap: true,
           noImplicitAny: false,
+          lib: ["es6"]
         }
       }
     },

@@ -16,12 +16,25 @@ export class HgDBQueryCtrl extends QueryCtrl {
 
     _.defaultsDeep(this.target, this.defaults);
 
-    this.target.target = this.target.target || 'select metric';
-    this.target.type = this.target.type || 'timeserie';
+    this.target.target = this.target.target || 'metricA';
+    this.target.type = this.target.type || 'dateMetricQuery';
+    this.target.luceneQuery = this.target.luceneQuery || 'mrc_status:A';
+    this.target.dateFieldName =  this.target.dateFieldName || 'mrc_createDate';
+    this.target.sortAscending =  this.target.sortAscending || 'desc';
+    this.target.pageSize =  this.target.pageSize || 100;
+
+  }
+
+  /** Pobieranie nazw pól reprezentujących daty */
+  getDateFielsdNames(query) {
+    var fieldNamesList = ["mrc_createDate", "mrc_lastModifyDate"];
+    return _.map(fieldNamesList, (d, i) => {
+      return {text : d, value: d};
+    })
   }
 
   getOptions(query) {
-    return this.datasource.metricFindQuery(query || '');
+    return [];
   }
 
   onChangeInternal() {

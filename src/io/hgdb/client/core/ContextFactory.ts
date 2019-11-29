@@ -18,8 +18,8 @@ export default class ContextFactory {
      * @param param0 parametry kontekstu
      */
     createContext(
-        { userName, userFullName, locale, timeZone, maxResults, currentRole, userRoles, sourceOfRequest, maxDepthResult }:
-            { userName: string; userFullName: string; locale: string; timeZone: string; maxResults: number; currentRole: string; userRoles:string[]; sourceOfRequest: string; maxDepthResult: number; }) {
+        { userName, userFullName, locale, timeZone, maxResults, currentRole, userRoles, sourceOfRequest, maxDepthResult, decodeResult }:
+            { userName: string; userFullName: string; locale: string; timeZone: string; maxResults: number; currentRole: string; userRoles:string[]; sourceOfRequest: string; maxDepthResult: number; decodeResult: string }) {
 
         var trustedData = false;
 
@@ -67,7 +67,7 @@ export default class ContextFactory {
                 "date.format.short": DATE_SHORT_FORMAT,
             },
             "ignoreAlternateFields": true,
-            "decodeResult": "DATE_AND_LOB",
+            "decodeResult": decodeResult,
             "maxDepthResult": maxDepthResult,
             "decodeRequest": "DATE_AND_LOB",
             "ignoreCaseHeaderInResponse": false,
