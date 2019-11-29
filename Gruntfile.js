@@ -60,7 +60,7 @@ module.exports = function(grunt) {
           experimentalDecorators: true,
           sourceMap: true,
           noImplicitAny: false,
-          lib: ["es6"]
+          lib: ["es6", "dom"]
         }
       }
     },
