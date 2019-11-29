@@ -2,7 +2,6 @@ import _ from 'lodash';
 import ContextFactory from './io/hgdb/client/core/ContextFactory';
 import ResponseParser from './io/hgdb/client/query/ResponseParser';
 import { SERVICE_SERVICE_CONTEXT, DECODE_DATE_AND_LOB, DECODE_NOTHING } from './io/hgdb/client/core/Constants';
-import MercuryResponse from './metcury_response';
 
 export default class HgDBDatasource {
   id: number;
@@ -55,6 +54,7 @@ export default class HgDBDatasource {
         seriesList.push(series);
       }
     }
+    console.log("-->query.seriesList", seriesList);
     return { data: seriesList };
   }
 
@@ -121,10 +121,33 @@ export default class HgDBDatasource {
         if (response.status === 200 && response.data.message != "NO_DATA_FOUND") {
           var dataResult = response.data.result;
           var datapointsResult = [];
-          var ix = 0; 
-          for (let dataRow of dataResult) {
-            eval("datapointsResult[ix] = [" + dataRow.B + "," + dataRow.A + "];");
-            ix++;
+          let lastTime = 0;
+          let diffTime = 60000;
+          if (duration == "PER_DAY") {
+            diffTime = diffTime * 60 * 24;
+          } else if (duration == "PER_HOUR") {
+            diffTime = diffTime * 60;
+          }
+          for (let i = 0; i < dataResult.length; i++) {
+            let currTime = +dataResult[i].A;
+            let currValue = +dataResult[i].B;
+
+            if (lastTime < currTime - diffTime) {
+              datapointsResult.push([0, currTime - diffTime]);
+            }
+            datapointsResult.push([currValue, currTime]);
+
+            if (i < dataResult.length - 1) {
+              let nextValue = +dataResult[i + 1].A;
+              if (nextValue > currTime + diffTime) {
+                datapointsResult.push([0, currTime + diffTime]);
+              }
+            } else if (rangeTo - currTime > diffTime) {
+              datapointsResult.push([0, currTime + diffTime]);
+            }
+
+
+            lastTime = currTime;
           }
           return {
             target : target.target,
