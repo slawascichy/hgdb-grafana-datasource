@@ -8,7 +8,8 @@
       "emitDecoratorMetadata": true,
       "experimentalDecorators": true,
       "noImplicitAny": false,
-      "lib": ["es6", "dom"]
+      "lib": ["es6", "dom"],
+      "skipLibCheck": true
   },
   "exclude": [
       "node_modules"

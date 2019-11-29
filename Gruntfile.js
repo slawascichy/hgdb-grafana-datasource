@@ -47,7 +47,7 @@ module.exports = function(grunt) {
       }
     },
 
-    typescript: {
+    ts: {
       build: {
         src: ['dist/**/*.ts', '!**/*.d.ts'],
         dest: 'dist',
@@ -60,7 +60,9 @@ module.exports = function(grunt) {
           experimentalDecorators: true,
           sourceMap: true,
           noImplicitAny: false,
-          lib: ["es6", "dom"]
+          lib: ["es6", "dom"],
+          skipLibCheck: true,
+          experimentalDecorators: true
         }
       }
     },
@@ -97,7 +99,7 @@ module.exports = function(grunt) {
   grunt.registerTask('default', [
     'clean',
     'copy:dist_js',
-    'typescript:build',
+    'ts:build',
     'copy:dist_html',
     'copy:dist_css',
     'copy:dist_img',
