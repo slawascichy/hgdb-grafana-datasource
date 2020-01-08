@@ -24,7 +24,7 @@ export default class HgDBDatasource {
   async query(options) {
     console.log("-->query.options", options);
     const seriesList = [];
-  
+
     var contextFactory = ContextFactory.getInstance();
     var context = contextFactory.createContext({
       userName: "anonymous",
@@ -36,7 +36,8 @@ export default class HgDBDatasource {
       userRoles: null,
       sourceOfRequest: null,
       maxDepthResult: 1,
-      decodeResult: DECODE_NOTHING
+      decodeResult: DECODE_NOTHING,
+      ignoreCaseHeaderInResponse: true
     });
 
     for (let target of options.targets) {
@@ -66,37 +67,35 @@ export default class HgDBDatasource {
   fieldMetricQuery(context, target, optionalOptions) {
     console.log("fieldMetricQuery", target);
     return {
-      target : target.target,
-      datapoints : []
+      target: target.target,
+      datapoints: []
     };
   }
 
   /** Zapytanie metryczne, usługa /dateMetricQuery */
   dateMetricQuery(context, target, optionalOptions) {
-    console.log("dateMetricQuery", target);
     var dateFieldName = target.dateFieldName;
     var sortAscending = target.sortAscending && target.sortAscending == "asc";
     var pageSize = optionalOptions.maxDataPoints;
-    
+
     /* ustalenie przedziału czasowego - START */
     /* domyślnie co minutę */
     var duration = "PER_MINUTE";
     var interval = optionalOptions.intervalMs;
     if (interval > 86400000) {
-      /* 86400000 - 1d */ 
+      /* 86400000 - 1d */
       duration = "PER_DAY";
     } else if (interval > 3600000) {
       /* 3600000 - 1h */
       duration = "PER_HOUR";
-    } 
+    }
     /* ustalenie przedziału czasowego - KONIEC */
-    
+
     var rangeFrom = optionalOptions.range.from._d.getTime();
     var rangeTo = optionalOptions.range.to._d.getTime();
 
-    var luceneQuery = 
+    var luceneQuery =
       "(" + target.luceneQuery + ") AND " + dateFieldName + ":[" + rangeFrom + " TO " + rangeTo + "]";
-    console.log("luceneQuery", luceneQuery);
 
     var jsonBody = {
       "context": context,
@@ -150,35 +149,90 @@ export default class HgDBDatasource {
             lastTime = currTime;
           }
           return {
-            target : target.target,
-            datapoints : datapointsResult
+            target: target.target,
+            datapoints: datapointsResult
           };
         } else {
           return {
-            target : target.target,
-            datapoints : []
+            target: target.target,
+            datapoints: []
           }
         }
       });
   }
 
   /** Zapytanie grupujące, usługa /groupByQuery */
-  groupByQuery(context, target,  optionalOptions) {
-    console.log("groupByQuery", target);
-    return {
-      target : target.target,
-      datapoints : []
+  groupByQuery(context, target, optionalOptions) {
+   
+    context.ignoreCaseHeaderInResponse = true;
+    context.decodeResult = DECODE_DATE_AND_LOB;
+    context.maxResults = 100000;
+
+    var dateFieldName = target.dateFieldName;
+    var pageSize = optionalOptions.maxDataPoints;
+
+    var rangeFrom = optionalOptions.range.from._d.getTime();
+    var rangeTo = optionalOptions.range.to._d.getTime();
+
+    var luceneQuery =
+      "(" + target.luceneQuery + ") AND " + dateFieldName + ":[" + rangeFrom + " TO " + rangeTo + "]";
+    var groupByClause = target.groupByClause;
+
+    var jsonBody = {
+      "context": context,
+      "query": luceneQuery,
+      "groupByClause": groupByClause,
+      "page": {
+        "size": pageSize,
+        "number": 1
+      }
     };
+    var serviceUrl = this.baseUrl + SERVICE_SERVICE_CONTEXT + '/CaseSearchExtRest/groupByQuery';
+    return this.backendSrv.datasourceRequest({
+      url: this.url + serviceUrl,
+      method: 'POST',
+      data: jsonBody,
+      async: false
+    })
+      .then(response => {
+        if (response.status === 200 && response.data.dto.message != "NO_DATA_FOUND") {
+          var dataResult = response.data.dto.result;
+          var responseRows = [];
+          var responseColumns = [];
+          for (let i = 0; i < dataResult.length; i++) {
+            let datarow = dataResult[i];
+            var row = [];
+            for (let label in datarow) {
+              if (i == 0) {
+                responseColumns.push({text: label});
+              }
+              row.push(datarow[label]);
+            }
+            responseRows.push(row);
+          }
+          return {
+            columns: responseColumns,
+            rows: responseRows,
+            type: "table"
+          }
+        } else {
+          return {
+            columns: [],
+            rows: [],
+            type: "table"
+          }
+        }
+      });
   }
 
   /** Zapytanie wyszukujące, usługa /searchByQuery */
   searchByQuery(context, target, optionalOptions) {
     console.log("searchByQuery", target);
     return {
-      target : target.target,
-      datapoints : []
+      target: target.target,
+      datapoints: []
     };
-}
+  }
 
   testDatasource() {
     var contextFactory = ContextFactory.getInstance();
@@ -192,7 +246,8 @@ export default class HgDBDatasource {
       userRoles: null,
       sourceOfRequest: null,
       maxDepthResult: 1,
-      decodeResult: DECODE_DATE_AND_LOB
+      decodeResult: DECODE_DATE_AND_LOB,
+      ignoreCaseHeaderInResponse: false
     });
     var jsonBody = {
       "context": context,

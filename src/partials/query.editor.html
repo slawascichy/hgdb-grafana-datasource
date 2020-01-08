@@ -1,3 +1,4 @@
+
 <query-editor-row query-ctrl="ctrl" can-collapse="false" has-text-edit-mode="true">
   <div class="gf-form-inline">
 
@@ -33,11 +34,22 @@
         ng-blur="ctrl.onChangeInternal()" />
     </div>
 
-    <div ng-if="ctrl.target.type=='dateMetricQuery'||ctrl.target.type=='fieldMetricQuery'">
+    <div ng-if="ctrl.target.type=='groupByQuery'">
+        <div class="gf-form">
+        <textarea class="gf-form-input" rows="5" cols="256" 
+          ng-model="ctrl.target.groupByClause" 
+          spellcheck="false"
+          ng-blur="ctrl.onChangeInternal()" />
+        </div>
+    </div>
+
+    <div ng-if="ctrl.target.type=='searchByQuery'">
+        <div class="gf-form">
         <select class="gf-form-input" 
         ng-model="ctrl.target.sortAscending" 
         ng-options="f as f for f in ['asc','desc']"
         ></select>
+        </div>
     </div>
 
     <!--s

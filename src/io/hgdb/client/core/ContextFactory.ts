@@ -18,8 +18,8 @@ export default class ContextFactory {
      * @param param0 parametry kontekstu
      */
     createContext(
-        { userName, userFullName, locale, timeZone, maxResults, currentRole, userRoles, sourceOfRequest, maxDepthResult, decodeResult }:
-            { userName: string; userFullName: string; locale: string; timeZone: string; maxResults: number; currentRole: string; userRoles:string[]; sourceOfRequest: string; maxDepthResult: number; decodeResult: string }) {
+        { userName, userFullName, locale, timeZone, maxResults, currentRole, userRoles, sourceOfRequest, maxDepthResult, decodeResult, ignoreCaseHeaderInResponse }:
+            { userName: string; userFullName: string; locale: string; timeZone: string; maxResults: number; currentRole: string; userRoles:string[]; sourceOfRequest: string; maxDepthResult: number; decodeResult: string; ignoreCaseHeaderInResponse: boolean }) {
 
         var trustedData = false;
 
@@ -33,7 +33,7 @@ export default class ContextFactory {
             timeZone = "Europe/Warsaw";
         }
         if (maxResults == null) {
-            maxResults = 10000;
+            maxResults = 500000;
         }
         if (sourceOfRequest == null) {
             sourceOfRequest = SOURCE_OF_REQUEST;
@@ -70,7 +70,7 @@ export default class ContextFactory {
             "decodeResult": decodeResult,
             "maxDepthResult": maxDepthResult,
             "decodeRequest": "DATE_AND_LOB",
-            "ignoreCaseHeaderInResponse": false,
+            "ignoreCaseHeaderInResponse": ignoreCaseHeaderInResponse,
             "cacheUsage": "TO_USE",
             "httpResponseCacheUsage": "NONE",
             "defaultLuceneSortClause": null,

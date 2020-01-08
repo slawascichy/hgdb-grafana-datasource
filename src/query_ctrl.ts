@@ -20,7 +20,7 @@ export class HgDBQueryCtrl extends QueryCtrl {
     this.target.type = this.target.type || 'dateMetricQuery';
     this.target.luceneQuery = this.target.luceneQuery || 'mrc_status:A';
     this.target.dateFieldName =  this.target.dateFieldName || 'mrc_createDate';
-    this.target.sortAscending =  this.target.sortAscending || 'desc';
+    this.target.sortAscending =  this.target.sortAscending || 'asc';
     this.target.pageSize =  this.target.pageSize || 100;
 
   }
