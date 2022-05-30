@@ -3,13 +3,13 @@
 Projekt źródła danych dla Grafany (https://grafana.com/oss/grafana/), oprogramowania pozwalającego na 
 wizualizację statystyk w postaci wykresów, budowania mechanizmów alertów, monitorowania sustemów.
 
-# Zanim zaczniesz
+### Zanim zaczniesz
 
 Trzeba sobie przygotować środowisko developerskie. Zainstaluj sobie:
 * Visual Studio Code - https://code.visualstudio.com/
 * Node.js(R) - https://nodejs.org/en/download/
 
-# Budowanie projektu
+### Budowanie projektu
 
 Projekt budujemy za pomocą pocecenia:
 ```
