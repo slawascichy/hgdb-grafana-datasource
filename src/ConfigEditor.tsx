@@ -5,12 +5,11 @@ import { HgdbDataSourceOptions, HgdbSecureJsonData } from './types';
 
 const { SecretFormField, FormField } = LegacyForms;
 
-interface Props extends DataSourcePluginOptionsEditorProps<HgdbDataSourceOptions> { }
+interface Props extends DataSourcePluginOptionsEditorProps<HgdbDataSourceOptions> {}
 
-interface State { }
+interface State {}
 
 export class ConfigEditor extends PureComponent<Props, State> {
-
   onServerUrlChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { onOptionsChange, options } = this.props;
     const jsonData = {
@@ -90,7 +89,6 @@ export class ConfigEditor extends PureComponent<Props, State> {
     };
     onOptionsChange({ ...options, jsonData });
   };
-
 
   render() {
     const { options } = this.props;

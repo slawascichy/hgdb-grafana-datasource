@@ -16,7 +16,6 @@ import { SERVICE_SERVICE_CONTEXT, DECODE_DATE_AND_LOB, DECODE_NOTHING } from './
 import { logDebug, logInfo } from '@grafana/runtime';
 
 export class HgdbDataSource extends DataSourceApi<MyQuery, HgdbDataSourceOptions> {
-
   id: number;
   name: string;
   baseUrl: string;
@@ -45,7 +44,7 @@ export class HgdbDataSource extends DataSourceApi<MyQuery, HgdbDataSourceOptions
     const to = range!.to.valueOf();
 
     // Return a constant for each query.
-    const data = options.targets.map(target => {
+    const data = options.targets.map((target) => {
       const query = defaults(target, defaultQuery);
       return new MutableDataFrame({
         refId: query.refId,
@@ -61,33 +60,33 @@ export class HgdbDataSource extends DataSourceApi<MyQuery, HgdbDataSourceOptions
 
   async testDatasource() {
     /* Start metody testDatasource */
-    logInfo("--> testDatasource: START");
+    logInfo('--> testDatasource: START');
     var contextFactory = ContextFactory.getInstance();
     var context = contextFactory.createContext({
-      userName: "anonymous",
+      userName: 'anonymous',
       userFullName: null,
       locale: null,
       timeZone: null,
       maxResults: 1,
-      currentRole: "anonymous",
+      currentRole: 'anonymous',
       userRoles: null,
       sourceOfRequest: null,
       maxDepthResult: 1,
       decodeResult: DECODE_DATE_AND_LOB,
-      ignoreCaseHeaderInResponse: false
+      ignoreCaseHeaderInResponse: false,
     });
     var jsonBody = {
-      "context": context,
-      "someText": "testDatasource"
+      context: context,
+      someText: 'testDatasource'
     };
     var serviceUrl = this.baseUrl + SERVICE_SERVICE_CONTEXT + '/CaseBusinessRest/echo';
-    logInfo("--> testDatasource: serviceUrl: " + serviceUrl);
+    logInfo('--> testDatasource: serviceUrl: ' + serviceUrl);
     return this.backendSrv.datasourceRequest({
-      url: this.url + serviceUrl,
-      method: 'POST',
-      data: jsonBody
+        url: this.url + serviceUrl,
+        method: 'POST',
+        data: jsonBody,
     })
-      .then(response => {
+      .then((response) => {
         if (response.status === 200) {
           return {
             status: 'success',
@@ -98,10 +97,10 @@ export class HgdbDataSource extends DataSourceApi<MyQuery, HgdbDataSourceOptions
         return {
           status: 'error',
           message: 'Returned http status code ' + response.status,
-          title: "Error"
+          title: 'Error'
         };
       })
-      .catch(error => {
+      .catch((error) => {
         let message = 'Mercury: ';
         message += error.statusText ? error.statusText + ': ' : '';
         if (error.data && error.data.Message) {
@@ -114,11 +113,9 @@ export class HgdbDataSource extends DataSourceApi<MyQuery, HgdbDataSourceOptions
         return {
           status: 'error',
           message: message,
-          title: "Error"
+          title: 'Error'
         };
       });
     /* Koniec metody testDatasource */
   }
-
-
 }

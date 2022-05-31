@@ -1,4 +1,3 @@
-
 export const OAUTH_AUTHENTCIATION_ERROR = 'Błąd uwierzytelniania.';
 export const REQUEST_COLLECTOR_IS_EMPTY_ERROR = 'Argument requestResultCollector musi być zainicjalizowany!';
 export const CANT_GET_TOKEN = 'Brak możliwości uzyskania tokena.';

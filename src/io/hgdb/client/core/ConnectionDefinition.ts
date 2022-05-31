@@ -39,5 +39,4 @@ export default class ConnectionDefinition {
     }
     return ConnectionDefinition.instance;
   }
-
 }

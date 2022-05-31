@@ -1,11 +1,9 @@
-
 /**
  * Obsługa błędów
  */
 export default class ErrorHandler {
 
-  constructor() {
-  }
+  constructor() {}
 
   /**
    * Logowanie wyjątku do konsoli
@@ -16,6 +14,6 @@ export default class ErrorHandler {
    * @param exception wyjątek Javascript
    */
   logException(methodName: string, message: string, status: any, exception: any) {
-    console.error("%s --> %s, Status: %s, Exception: %s", methodName, message, status, exception);
+    console.error('%s --> %s, Status: %s, Exception: %s', methodName, message, status, exception);
   }
-};
+}

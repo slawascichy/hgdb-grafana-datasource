@@ -12,7 +12,7 @@ export default class AjaxMethods {
   }
 
   /**
-   * Metoda odpowiedzialna za wyświetlenie JSON`a zapisanego w postaci 
+   * Metoda odpowiedzialna za wyświetlenie JSON`a zapisanego w postaci
    * String'a w postaci obiektu
    *
    * @param stringData dane wysyłane w postaci String'a
@@ -50,7 +50,7 @@ export default class AjaxMethods {
     } else {
       return $.ajax({
         headers: {
-          'Authorization': token,
+          Authorization: token,
         },
         url: serviceUrl,
         contentType: 'application/json',
@@ -69,7 +69,7 @@ export default class AjaxMethods {
     if (token === null) {
       return $.ajax({
         headers: {
-          'Authorization': token,
+          Authorization: token,
         },
         url: serviceUrl,
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
@@ -90,11 +90,9 @@ export default class AjaxMethods {
     }
   }
 
-
-
   /**
    * Wysyłanie żądania Ajax - POST
-   * 
+   *
    * @param serviceUrl adres, pod który wysyłane są dane
    * @param jsonBody dane wysyłane metodą POST w postaci JSON
    * @param isCache czy ma być użyta pamięć podręczna? [true/false] 
@@ -107,16 +105,14 @@ export default class AjaxMethods {
 
   /**
    * Wysyłanie żądania Ajax - GET
-   * 
+   *
    * @param serviceUrl adres, pod który wysyłane są dane
    * @param jsonParams dane wysyłane metodą POST w postaci JSON
-   * @param isCache czy ma być użyta pamięć podręczna? [true/false] 
+   * @param isCache czy ma być użyta pamięć podręczna? [true/false]
    * @param token token autoryzacyjny
-   * 
    */
   requestByGet(serviceUrl, jsonParams, isCache, token) {
     const methodName = this.objectName + '.requestByGet';
     return this.requestWithParams('GET', serviceUrl, jsonParams, isCache, token);
   }
-
 }
