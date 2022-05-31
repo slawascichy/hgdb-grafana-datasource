@@ -56,41 +56,43 @@ export default class GetData {
   private checkStatus(methodName: string, requestResult: RequestResult) {
     var message: string;
     var result = requestResult.getResult();
-    if (result.status != undefined) {
-      if (result.status != 'SUCCESS') {
+    if (result.status !== undefined) {
+      if (result.status !== 'SUCCESS') {
         if (result.message.includes('WRONG_REQUEST')) {
           message = WRONG_REQUEST;
-        }
-        else if (result.message.includes('EMPTY_REQUEST')) {
+        } else if (result.message.includes('EMPTY_REQUEST')) {
           message = EMPTY_REQUEST;
-        }
-        else if (result.message.includes('NO_PAGE_SIZE')) {
+        } else if (result.message.includes('NO_PAGE_SIZE')) {
           message = NO_PAGE_SIZE;
-        }
-        else if (result.message.includes('NO_PAGE_NUMBER')) {
+        } else if (result.message.includes('NO_PAGE_NUMBER')) {
           message = NO_PAGE_NUMBER;
-        }
-        else {
+        } else {
           message = OTHER_ERROR;
         }
-        message = ERROR_IN_REQUEST + '\'' + message + '\'';
-        this.errorHandler.logException( methodName, message, /* status */ result.status, /* exception */ null);
+        message = ERROR_IN_REQUEST + "'" + message + "'";
+        this.errorHandler.logException(methodName, message, /* status */ result.status, /* exception */ null);
         requestResult.setIsError(true);
         return;
       }
     }
-    if (result.errorCode != undefined && result.errorCode != '') {
+    if (result.errorCode !== undefined && result.errorCode !== '') {
       var errorCode = result.errorCode;
       var errorMessage = result.errorMessage;
       message = '[' + errorCode + '] ' + errorMessage;
-      this.errorHandler.logException( methodName, message, /* status */ 'error_in_result', /* exception */ null);
+      this.errorHandler.logException(methodName, message, /* status */ 'error_in_result', /* exception */ null);
       requestResult.setIsError(true);
       return;
     }
     requestResult.setIsError(false);
   }
 
-  loadData(requestResultCollector: RequestResult, serviceUrl, jsonBody, isCache, requestMethod) {
+  loadData(
+    requestResultCollector: RequestResult,
+    serviceUrl: string,
+    jsonBody,
+    isCache,
+    requestMethod
+  ) {
     const methodName = this.objectName + '.loadData(' + serviceUrl + ')';
     console.debug(methodName + ': START ');
 
@@ -158,32 +160,27 @@ export default class GetData {
   }
 
   private loadWithAuthorizationToken(
-    methodName,
+    methodName: string,
     requestResultCollector: RequestResult,
-    serviceUrl,
+    serviceUrl: string,
     jsonBody,
     isCache,
-    requestMethod,
+    requestMethod: string,
     oAuthToken: OAuthToken
   ) {
     var authorizationToken: string;
     var authorizationSucces = false;
     var tokenUrl = oAuthToken.getTokenUrl();
     var tokenParams = oAuthToken.getParams();
-    this.accessByAjax.requestWithParams( 'POST', tokenUrl, tokenParams, /* isCache */ false, /* token */ null)
-      .done(result => {
+    this.accessByAjax.requestWithParams('POST', tokenUrl, tokenParams, /* isCache */ false, /* token */ null)
+      .done((result) => {
         authorizationSucces = oAuthToken.setSessionToken(result);
         authorizationToken = oAuthToken.getAuthorizationToken();
         requestResultCollector.setIsError(!authorizationSucces);
       })
       .fail((result, status, er) => {
         requestResultCollector.setIsError(true);
-        this.errorHandler.logException(
-          methodName,
-          CANT_GET_TOKEN + ' ' + result,
-                /* status */ status,
-                /* exception */ er
-        );
+        this.errorHandler.logException(methodName, CANT_GET_TOKEN + ' ' + result, /* status */ status, /* exception */ er);
       });
 
     if (requestResultCollector.getIsError()) {
