@@ -3,7 +3,6 @@ import { WRONG_VALUE } from './Constants';
 import ErrorHandler from './ErrorHandler';
 
 export default class AjaxMethods {
-
   private objectName: string;
   private errorHandler: ErrorHandler;
 
@@ -13,22 +12,22 @@ export default class AjaxMethods {
   }
 
   /**
-     * Metoda odpowiedzialna za wyświetlenie JSON`a zapisanego w postaci 
-     * String'a w postaci obiektu
-     *
-     * @param stringData dane wysyłane w postaci String'a
-     */
+   * Metoda odpowiedzialna za wyświetlenie JSON`a zapisanego w postaci 
+   * String'a w postaci obiektu
+   *
+   * @param stringData dane wysyłane w postaci String'a
+   */
   parse2JSON(stringData: string) {
-    const methodName = this.objectName + ".parse2JSON";
+    const methodName = this.objectName + '.parse2JSON';
     var result = stringData;
     try {
       result = JSON.parse(stringData);
     } catch (err) {
       this.errorHandler.logException(
-                /* methodName */ methodName,
-                /* message */ WRONG_VALUE + ":" + stringData,
-                /* status */ "parse2JSON_error",
-                /* exception */ err
+        /* methodName */ methodName,
+        /* message */ WRONG_VALUE + ':' + stringData,
+        /* status */ 'parse2JSON_error',
+        /* exception */ err
       );
     } finally {
       return result;
@@ -36,33 +35,33 @@ export default class AjaxMethods {
   }
 
   requestWithBody(method, serviceUrl, jsonBody, isCache, token) {
-    const methodName = this.objectName + ".requestWithBody";
+    const methodName = this.objectName + '.requestWithBody';
 
     if (token === null) {
       return $.ajax({
         url: serviceUrl,
-        contentType: "application/json",
+        contentType: 'application/json',
         type: method,
         dataType: 'JSON',
         data: JSON.stringify(jsonBody),
         cache: isCache,
-        async: false
+        async: false,
       });
     } else {
       return $.ajax({
         headers: {
-          "Authorization": token
+          'Authorization': token,
         },
         url: serviceUrl,
-        contentType: "application/json",
+        contentType: 'application/json',
         type: method,
         dataType: 'JSON',
         data: JSON.stringify(jsonBody),
         cache: isCache,
-        async: false
+        async: false,
       });
     }
-  };
+  }
 
   requestWithParams(method, serviceUrl, jsonParams, isCache, token) {
     const methodName = this.objectName + '.requestWithParams';
@@ -70,14 +69,14 @@ export default class AjaxMethods {
     if (token === null) {
       return $.ajax({
         headers: {
-          "Authorization": token
+          'Authorization': token,
         },
         url: serviceUrl,
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
         type: method,
         data: $.param(jsonParams),
         cache: isCache,
-        async: false
+        async: false,
       });
     } else {
       return $.ajax({
@@ -86,10 +85,10 @@ export default class AjaxMethods {
         type: method,
         data: $.param(jsonParams),
         cache: isCache,
-        async: false
+        async: false,
       });
     }
-  };
+  }
 
 
 
@@ -104,7 +103,7 @@ export default class AjaxMethods {
   requestByPost(serviceUrl, jsonBody, isCache, token) {
     const methodName = this.objectName + '.requestByPost';
     return this.requestWithBody('POST', serviceUrl, jsonBody, isCache, token);
-  };
+  }
 
   /**
    * Wysyłanie żądania Ajax - GET
@@ -118,8 +117,6 @@ export default class AjaxMethods {
   requestByGet(serviceUrl, jsonParams, isCache, token) {
     const methodName = this.objectName + '.requestByGet';
     return this.requestWithParams('GET', serviceUrl, jsonParams, isCache, token);
-  };
+  }
 
-};
-
-
+}

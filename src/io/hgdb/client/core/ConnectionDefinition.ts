@@ -2,7 +2,6 @@ import { SERVICE_APP_CONTEXT, SERVICE_REST_CONTEXT, SERVICE_SERVICE_CONTEXT } fr
 import OAuthToken from './OAuthToken';
 
 export default class ConnectionDefinition {
-
   private static instance: ConnectionDefinition;
   private configuration: any;
   private severUrl: string;
@@ -27,7 +26,7 @@ export default class ConnectionDefinition {
       serviceApp: this.severUrl + SERVICE_APP_CONTEXT,
       rest: this.severUrl + SERVICE_REST_CONTEXT,
       service: this.severUrl + SERVICE_SERVICE_CONTEXT,
-    }
+    };
   }
 
   getConfiguration() {
