@@ -153,8 +153,12 @@ export default class GetData {
       }
     } else {
       /* Kolektor danych musi być zainicjalizowany */
-      this.errorHandler
-        .logException(methodName, REQUEST_COLLECTOR_IS_EMPTY_ERROR, /* status */ 'load_data_error', /* exception */ null);
+      this.errorHandler.logException(
+        methodName,
+        REQUEST_COLLECTOR_IS_EMPTY_ERROR,
+        /* status */ 'load_data_error',
+        /* exception */ null
+      );
     }
     return requestResultCollector;
   }
@@ -181,8 +185,12 @@ export default class GetData {
       })
       .fail((result, status, er) => {
         requestResultCollector.setIsError(true);
-        this.errorHandler
-          .logException(methodName, CANT_GET_TOKEN + ' ' + result, /* status */ status, /* exception */ er);
+        this.errorHandler.logException(
+          methodName,
+          CANT_GET_TOKEN + ' ' + result,
+          /* status */ status,
+          /* exception */ er
+        );
       });
 
     if (requestResultCollector.getIsError()) {
@@ -214,15 +222,19 @@ export default class GetData {
     var requestPrams = oAuthToken.getRefreshTokenParams();
     this.accessByAjax
       .requestWithParams('POST', tokenUrl, requestPrams, /* isCache */ false, /* token */ null)
-      .done(result => {
+      .done((result) => {
         authorizationSucces = oAuthToken.setSessionToken(result);
         authorizationToken = oAuthToken.getAuthorizationToken();
         requestResultCollector.setIsError(!authorizationSucces);
       })
       .fail((result, status, er) => {
         requestResultCollector.setIsError(true);
-        this.errorHandler
-          .logException(methodName, CANT_GET_TOKEN + ' ' + result, /* status */ status, /* exception */ er);
+        this.errorHandler.logException(
+          methodName,
+          CANT_GET_TOKEN + ' ' + result,
+          /* status */ status,
+          /* exception */ er
+        );
       });
 
     if (requestResultCollector.getIsError()) {
@@ -261,8 +273,12 @@ export default class GetData {
       })
       .fail((result, status, er) => {
         requestResultCollector.setIsError(true);
-        this.errorHandler
-          .logException(methodName, /* message */ LOAD_DATA_ERROR + ' ' + result, /* status */ status, /* exception */ er);
+        this.errorHandler.logException(
+          methodName,
+          /* message */ LOAD_DATA_ERROR + ' ' + result,
+          /* status */ status,
+          /* exception */ er
+        );
       });
     return requestResultCollector;
   }

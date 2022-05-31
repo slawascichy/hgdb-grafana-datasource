@@ -98,12 +98,7 @@ export default class AjaxMethods {
    * @param isCache czy ma być użyta pamięć podręczna? [true/false]
    * @param token token autoryzacyjny
    */
-  requestByPost(
-    serviceUrl: string,
-    jsonBody,
-    isCache: boolean,
-    token: string
-  ) {
+  requestByPost(serviceUrl: string, jsonBody, isCache: boolean, token: string) {
     const methodName = this.objectName + '.requestByPost';
     return this.requestWithBody('POST', serviceUrl, jsonBody, isCache, token);
   }
@@ -116,12 +111,7 @@ export default class AjaxMethods {
    * @param isCache czy ma być użyta pamięć podręczna? [true/false]
    * @param token token autoryzacyjny
    */
-  requestByGet(
-    serviceUrl: string,
-    jsonParams,
-    isCache:boolean,
-    token: string
-  ) {
+  requestByGet(serviceUrl: string, jsonParams, isCache: boolean, token: string) {
     const methodName = this.objectName + '.requestByGet';
     return this.requestWithParams('GET', serviceUrl, jsonParams, isCache, token);
   }
