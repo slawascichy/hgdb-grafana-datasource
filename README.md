@@ -8,6 +8,12 @@ This is MercuryDB 3.0 (Hgdb) Grafana Data Source Plugin
 
 Grafana supports a wide range of data sources, including Prometheus, MySQL, and even Datadog. There’s a good chance you can already visualize metrics from the systems you have set up. In some cases, though, you already have an in-house metrics solution that you’d like to add to your Grafana dashboards. Grafana Data Source Plugins enables integrating such solutions with Grafana.
 
+## Before you start
+
+You need to prepare a development environment. Install yourself:
+* [Visual Studio Code](https://code.visualstudio.com/)
+* [Node.js(R)](https://nodejs.org/en/download/)
+
 ## Getting started
 
 1. Install dependencies
