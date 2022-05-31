@@ -16,13 +16,13 @@ import { SERVICE_SERVICE_CONTEXT, DECODE_DATE_AND_LOB, DECODE_NOTHING } from './
 import { logDebug, logInfo } from '@grafana/runtime';
 
 export class HgdbDataSource extends DataSourceApi<MyQuery, HgdbDataSourceOptions> {
-  
+
   id: number;
   name: string;
   baseUrl: string;
   url: string;
   responseParser: ResponseParser;
-  
+
   backendSrv: any;
   templateSrv: any;
   q: any;
@@ -33,7 +33,7 @@ export class HgdbDataSource extends DataSourceApi<MyQuery, HgdbDataSourceOptions
     this.id = instanceSettings.id;
     this.baseUrl = '/mercurydb';
     this.url = instanceSettings.url;
-   
+
     this.backendSrv = backendSrv;
     this.templateSrv = templateSrv;
     this.responseParser = new ResponseParser($q);
@@ -58,7 +58,7 @@ export class HgdbDataSource extends DataSourceApi<MyQuery, HgdbDataSourceOptions
 
     return { data };
   }
-  
+
   async testDatasource() {
     /* Start metody testDatasource */
     logInfo("--> testDatasource: START");
@@ -83,10 +83,10 @@ export class HgdbDataSource extends DataSourceApi<MyQuery, HgdbDataSourceOptions
     var serviceUrl = this.baseUrl + SERVICE_SERVICE_CONTEXT + '/CaseBusinessRest/echo';
     logInfo("--> testDatasource: serviceUrl: " + serviceUrl);
     return this.backendSrv.datasourceRequest({
-        url: this.url + serviceUrl,
-        method: 'POST',
-        data: jsonBody
-      })
+      url: this.url + serviceUrl,
+      method: 'POST',
+      data: jsonBody
+    })
       .then(response => {
         if (response.status === 200) {
           return {

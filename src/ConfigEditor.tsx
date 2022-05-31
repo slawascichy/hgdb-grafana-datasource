@@ -5,9 +5,9 @@ import { HgdbDataSourceOptions, HgdbSecureJsonData } from './types';
 
 const { SecretFormField, FormField } = LegacyForms;
 
-interface Props extends DataSourcePluginOptionsEditorProps<HgdbDataSourceOptions> {}
+interface Props extends DataSourcePluginOptionsEditorProps<HgdbDataSourceOptions> { }
 
-interface State {}
+interface State { }
 
 export class ConfigEditor extends PureComponent<Props, State> {
 
