@@ -1,4 +1,4 @@
-import {WRONG_PASSWORD, INVALID_SCOPE, INVALID_CLIENT_ID, INVALID_GRANT} from './Constants';
+import { WRONG_PASSWORD, INVALID_SCOPE, INVALID_CLIENT_ID, INVALID_GRANT } from './Constants';
 import ErrorHandler from './ErrorHandler';
 
 export default class OAuthToken {
@@ -55,7 +55,12 @@ export default class OAuthToken {
         default:
           errorInSideResult = error;
       }
-      this.errorHandler.logException(methodName, /* message */ errorInSideResult, /* status */ 'oauth_error', /* exception */ null);
+      this.errorHandler.logException(
+        methodName,
+        /* message */ errorInSideResult,
+        /* status */ 'oauth_error',
+        /* exception */ null
+      );
       return false;
       /* błąd nie jest pusty - KONIEC */
     }
@@ -81,11 +86,10 @@ export default class OAuthToken {
       return true;
     }
     var currDate = Date.now();
-    expiresDate = (
+    expiresDate =
       /* czas ustawienia tokena */ this.startTime +
       /* czas ekspiracji tokena */ this.sessionToken.expires_in * 1000 -
-      /* odejmuję 1s dla bezpieczeństwa */ 1000
-    );
+      /* odejmuję 1s dla bezpieczeństwa */ 1000;
     return currDate > expiresDate;
   }
 
@@ -96,12 +100,11 @@ export default class OAuthToken {
       return null;
     }
     var currDate = Date.now();
-    expiresDate = (
+    expiresDate =
       /* czas ustawienia tokena */ this.startTime + 
       /* czas ekspiracji tokena */ this.sessionToken.expires_in * 1000 + 
       /* czas ekspiracji tokena do odświeżania */ 60 * 60 * 1000 - 
-      /* odejmuję 1s dla bezpieczeństwa */ 1000
-    );
+      /* odejmuję 1s dla bezpieczeństwa */ 1000;
     if (currDate > expiresDate || !this.sessionToken.refresh_token) {
       return null;
     }

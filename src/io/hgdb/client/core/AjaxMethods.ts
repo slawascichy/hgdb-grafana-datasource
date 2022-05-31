@@ -34,7 +34,13 @@ export default class AjaxMethods {
     }
   }
 
-  requestWithBody(method, serviceUrl, jsonBody, isCache, token) {
+  requestWithBody(
+    method: string,
+    serviceUrl: string,
+    jsonBody,
+    isCache: boolean,
+    token: string
+  ) {
     const methodName = this.objectName + '.requestWithBody';
 
     if (token === null) {
@@ -63,7 +69,13 @@ export default class AjaxMethods {
     }
   }
 
-  requestWithParams(method, serviceUrl, jsonParams, isCache, token) {
+  requestWithParams(
+    method: string,
+    serviceUrl: string,
+    jsonParams,
+    isCache: boolean,
+    token: string
+  ) {
     const methodName = this.objectName + '.requestWithParams';
 
     if (token === null) {
@@ -98,7 +110,12 @@ export default class AjaxMethods {
    * @param isCache czy ma być użyta pamięć podręczna? [true/false]
    * @param token token autoryzacyjny
    */
-  requestByPost(serviceUrl, jsonBody, isCache, token) {
+  requestByPost(
+    serviceUrl: string,
+    jsonBody,
+    isCache: boolean,
+    token: string
+  ) {
     const methodName = this.objectName + '.requestByPost';
     return this.requestWithBody('POST', serviceUrl, jsonBody, isCache, token);
   }
@@ -111,7 +128,12 @@ export default class AjaxMethods {
    * @param isCache czy ma być użyta pamięć podręczna? [true/false]
    * @param token token autoryzacyjny
    */
-  requestByGet(serviceUrl, jsonParams, isCache, token) {
+  requestByGet(
+    serviceUrl: string,
+    jsonParams,
+    isCache:boolean,
+    token: string
+  ) {
     const methodName = this.objectName + '.requestByGet';
     return this.requestWithParams('GET', serviceUrl, jsonParams, isCache, token);
   }

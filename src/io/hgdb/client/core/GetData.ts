@@ -90,8 +90,8 @@ export default class GetData {
     requestResultCollector: RequestResult,
     serviceUrl: string,
     jsonBody,
-    isCache,
-    requestMethod
+    isCache: boolean,
+    requestMethod: string
   ) {
     const methodName = this.objectName + '.loadData(' + serviceUrl + ')';
     console.debug(methodName + ': START ');
@@ -154,7 +154,7 @@ export default class GetData {
       }
     } else {
       /* Kolektor danych musi być zainicjalizowany */
-      this.errorHandler.logException( methodName, REQUEST_COLLECTOR_IS_EMPTY_ERROR, /* status */ 'load_data_error', /* exception */ null);
+      this.errorHandler.logException(methodName, REQUEST_COLLECTOR_IS_EMPTY_ERROR, /* status */ 'load_data_error', /* exception */ null);
     }
     return requestResultCollector;
   }
@@ -198,12 +198,12 @@ export default class GetData {
   }
 
   private loadWitRefreshToken(
-    methodName,
+    methodName: string,
     requestResultCollector: RequestResult,
-    serviceUrl,
+    serviceUrl: string,
     jsonBody,
-    isCache,
-    requestMethod,
+    isCache: boolean,
+    requestMethod: string,
     oAuthToken: OAuthToken
   ) {
     var authorizationToken: string;
@@ -247,13 +247,13 @@ export default class GetData {
   }
 
   private internalLoadData(
-    methodName,
+    methodName: string,
     requestResultCollector: RequestResult,
-    serviceUrl,
+    serviceUrl: string,
     jsonBody,
-    isCache,
-    requestMethod,
-    authorizationToken
+    isCache: boolean,
+    requestMethod: string,
+    authorizationToken: string
   ) {
     var ajax: any;
     if (requestMethod == 'POST') {
@@ -261,18 +261,18 @@ export default class GetData {
         serviceUrl,
         jsonBody,
         isCache,
-                /* token */ authorizationToken
+        /* token */ authorizationToken
       );
     } else {
       ajax = this.accessByAjax.requestByGet(
         serviceUrl,
         jsonBody,
         isCache,
-                /* token */ authorizationToken
+        /* token */ authorizationToken
       );
     }
     ajax
-      .done(result => {
+      .done((result) => {
         requestResultCollector.setResult(result);
         this.checkStatus(result, requestResultCollector);
       })
@@ -280,9 +280,9 @@ export default class GetData {
         requestResultCollector.setIsError(true);
         this.errorHandler.logException(
           methodName,
-                /* message */ LOAD_DATA_ERROR + ' ' + result,
-                /* status */status,
-                /* exception */ er
+          /* message */ LOAD_DATA_ERROR + ' ' + result,
+          /* status */ status,
+          /* exception */ er
         );
       });
     return requestResultCollector;
