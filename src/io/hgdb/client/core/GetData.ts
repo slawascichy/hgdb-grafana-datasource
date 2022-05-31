@@ -3,7 +3,19 @@ import ErrorHandler from './ErrorHandler';
 import ConnectionDefinition from './ConnectionDefinition';
 import RequestResult from './RequestResult';
 import OAuthToken from './OAuthToken';
-import { OAUTH_AUTHENTCIATION_ERROR, REQUEST_COLLECTOR_IS_EMPTY_ERROR, CANT_GET_TOKEN, CANT_FIND_REQUEST_METHOD, LOAD_DATA_ERROR, WRONG_REQUEST, EMPTY_REQUEST, NO_PAGE_SIZE, NO_PAGE_NUMBER, OTHER_ERROR, ERROR_IN_REQUEST } from './Constants';
+import {
+  OAUTH_AUTHENTCIATION_ERROR,
+  REQUEST_COLLECTOR_IS_EMPTY_ERROR,
+  CANT_GET_TOKEN,
+  CANT_FIND_REQUEST_METHOD,
+  LOAD_DATA_ERROR,
+  WRONG_REQUEST,
+  EMPTY_REQUEST,
+  NO_PAGE_SIZE,
+  NO_PAGE_NUMBER,
+  OTHER_ERROR,
+  ERROR_IN_REQUEST,
+} from './Constants';
 
 export default class GetData {
   objectName: string;
@@ -62,11 +74,7 @@ export default class GetData {
           message = OTHER_ERROR;
         }
         message = ERROR_IN_REQUEST + '\'' + message + '\'';
-        this.errorHandler.logException(
-          methodName,
-          message,
-                    /* status */ result.status,
-                    /* exception */ null);
+        this.errorHandler.logException( methodName, message, /* status */ result.status, /* exception */ null);
         requestResult.setIsError(true);
         return;
       }
@@ -75,11 +83,7 @@ export default class GetData {
       var errorCode = result.errorCode;
       var errorMessage = result.errorMessage;
       message = '[' + errorCode + '] ' + errorMessage;
-      this.errorHandler.logException(
-        methodName,
-        message,
-                /* status */ 'error_in_result',
-                /* exception */ null);
+      this.errorHandler.logException( methodName, message, /* status */ 'error_in_result', /* exception */ null);
       requestResult.setIsError(true);
       return;
     }
@@ -148,12 +152,7 @@ export default class GetData {
       }
     } else {
       /* Kolektor danych musi być zainicjalizowany */
-      this.errorHandler.logException(
-        methodName,
-        REQUEST_COLLECTOR_IS_EMPTY_ERROR,
-                /* status */ 'load_data_error',
-                /* exception */ null
-      );
+      this.errorHandler.logException( methodName, REQUEST_COLLECTOR_IS_EMPTY_ERROR, /* status */ 'load_data_error', /* exception */ null);
     }
     return requestResultCollector;
   }
@@ -171,13 +170,7 @@ export default class GetData {
     var authorizationSucces = false;
     var tokenUrl = oAuthToken.getTokenUrl();
     var tokenParams = oAuthToken.getParams();
-    this.accessByAjax.requestWithParams(
-      'POST',
-      tokenUrl,
-      tokenParams,
-            /* isCache */ false,
-            /* token */ null
-    )
+    this.accessByAjax.requestWithParams( 'POST', tokenUrl, tokenParams, /* isCache */ false, /* token */ null)
       .done(result => {
         authorizationSucces = oAuthToken.setSessionToken(result);
         authorizationToken = oAuthToken.getAuthorizationToken();
@@ -204,7 +197,7 @@ export default class GetData {
       isCache,
       requestMethod,
       authorizationToken
-    );;
+    );
   }
 
   private loadWitRefreshToken(

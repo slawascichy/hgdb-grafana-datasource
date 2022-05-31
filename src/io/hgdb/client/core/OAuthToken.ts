@@ -1,5 +1,8 @@
 import {
-  WRONG_PASSWORD, INVALID_SCOPE, INVALID_CLIENT_ID, INVALID_GRANT
+  WRONG_PASSWORD,
+  INVALID_SCOPE,
+  INVALID_CLIENT_ID,
+  INVALID_GRANT,
 } from './Constants';
 import ErrorHandler from './ErrorHandler';
 
@@ -9,19 +12,19 @@ export default class OAuthToken {
   private errorHandler: ErrorHandler;
   private tokenUrl: string;
   private params: {
-    grant_type: string,
-    username: string,
-    password: string,
-    client_id: string,
-    client_secret: string
-    scope: string
+    grant_type: string;
+    username: string;
+    password: string;
+    client_id: string;
+    client_secret: string;
+    scope: string;
   };
   private sessionToken: {
-    access_token: string,
-    expires_in: number,
-    refresh_token: string,
-    scope: string,
-    token_type: string
+    access_token: string;
+    expires_in: number;
+    refresh_token: string;
+    scope: string;
+    token_type: string;
   };
   private startTime: number;
 
@@ -34,9 +37,9 @@ export default class OAuthToken {
   }
 
   setSessionToken(sessionToken: any) {
-    const methodName = this.objectName + ".setSessionToken";
+    const methodName = this.objectName + '.setSessionToken';
     var error = sessionToken.error;
-    if (error != undefined && error != null && error != "") {
+    if (error !== undefined && error != null && error !== '') {
       var errorInSideResult: any;
       /* błąd nie jest pusty - START */
       switch (error) {
@@ -58,21 +61,16 @@ export default class OAuthToken {
         default:
           errorInSideResult = error;
       }
-      /* błąd nie jest pusty - KONIEC */
-      this.errorHandler.logException(
-        methodName,
-                /* message */ errorInSideResult,
-                /* status */ "oauth_error",
-                /* exception */ null
-      );
+      this.errorHandler.logException(methodName, /* message */ errorInSideResult, /* status */ 'oauth_error', /* exception */ null);
       return false;
+      /* błąd nie jest pusty - KONIEC */
     }
     this.sessionToken = {
       access_token: sessionToken.access_token,
       expires_in: sessionToken.expires_in,
       refresh_token: sessionToken.refresh_token,
       scope: sessionToken.scope,
-      token_type: sessionToken.token_type
+      token_type: sessionToken.token_type,
     };
     this.startTime = Date.now();
     return true;
@@ -108,14 +106,7 @@ export default class OAuthToken {
     }
     var currDate = Date.now();
     expiresDate = (
-      /* czas ustawienia tokena */
-      this.startTime
-      /* czas ekspiracji tokena */
-      + (this.sessionToken.expires_in * 1000)
-      /* czas ekspiracji tokena do odświeżania */
-      + (60 * 60 * 1000)
-      /* odejmuję 1s dla bezpieczeństwa */
-      - 1000
+      /* czas ustawienia tokena */ this.startTime + /* czas ekspiracji tokena */ this.sessionToken.expires_in * 1000 + /* czas ekspiracji tokena do odświeżania */ 60 * 60 * 1000 - /* odejmuję 1s dla bezpieczeństwa */ 1000
     );
     if (currDate > expiresDate || !this.sessionToken.refresh_token) {
       return null;
@@ -128,7 +119,7 @@ export default class OAuthToken {
     if (this.sessionToken == null || this.isExpired() || !this.sessionToken.access_token) {
       return null;
     }
-    return this.sessionToken.token_type + " " + this.sessionToken.access_token;
+    return this.sessionToken.token_type + ' ' + this.sessionToken.access_token;
   }
 
   getParams() {
@@ -140,11 +131,11 @@ export default class OAuthToken {
       return null;
     }
     return {
-      grant_type: "refresh_token",
+      grant_type: 'refresh_token',
       refresh_token: this.getRefreshToken(),
       client_id: this.params.client_id,
       client_secret: this.params.client_secret,
-      scope: this.params.scope
+      scope: this.params.scope,
     };
   }
 }
