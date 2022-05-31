@@ -101,9 +101,9 @@ export default class OAuthToken {
     }
     var currDate = Date.now();
     expiresDate =
-      /* czas ustawienia tokena */ this.startTime + 
-      /* czas ekspiracji tokena */ this.sessionToken.expires_in * 1000 + 
-      /* czas ekspiracji tokena do odświeżania */ 60 * 60 * 1000 - 
+      /* czas ustawienia tokena */ this.startTime +
+      /* czas ekspiracji tokena */ this.sessionToken.expires_in * 1000 +
+      /* czas ekspiracji tokena do odświeżania */ 60 * 60 * 1000 -
       /* odejmuję 1s dla bezpieczeństwa */ 1000;
     if (currDate > expiresDate || !this.sessionToken.refresh_token) {
       return null;

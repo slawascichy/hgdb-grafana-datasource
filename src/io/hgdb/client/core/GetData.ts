@@ -94,7 +94,6 @@ export default class GetData {
     requestMethod: string
   ) {
     const methodName = this.objectName + '.loadData(' + serviceUrl + ')';
-    console.debug(methodName + ': START ');
 
     if (requestResultCollector) {
       var oAuthToken: OAuthToken;
@@ -154,7 +153,8 @@ export default class GetData {
       }
     } else {
       /* Kolektor danych musi być zainicjalizowany */
-      this.errorHandler.logException(methodName, REQUEST_COLLECTOR_IS_EMPTY_ERROR, /* status */ 'load_data_error', /* exception */ null);
+      this.errorHandler
+        .logException(methodName, REQUEST_COLLECTOR_IS_EMPTY_ERROR, /* status */ 'load_data_error', /* exception */ null);
     }
     return requestResultCollector;
   }
@@ -164,7 +164,7 @@ export default class GetData {
     requestResultCollector: RequestResult,
     serviceUrl: string,
     jsonBody,
-    isCache,
+    isCache: boolean,
     requestMethod: string,
     oAuthToken: OAuthToken
   ) {
@@ -172,7 +172,8 @@ export default class GetData {
     var authorizationSucces = false;
     var tokenUrl = oAuthToken.getTokenUrl();
     var tokenParams = oAuthToken.getParams();
-    this.accessByAjax.requestWithParams('POST', tokenUrl, tokenParams, /* isCache */ false, /* token */ null)
+    this.accessByAjax
+      .requestWithParams('POST', tokenUrl, tokenParams, /* isCache */ false, /* token */ null)
       .done((result) => {
         authorizationSucces = oAuthToken.setSessionToken(result);
         authorizationToken = oAuthToken.getAuthorizationToken();
@@ -180,7 +181,8 @@ export default class GetData {
       })
       .fail((result, status, er) => {
         requestResultCollector.setIsError(true);
-        this.errorHandler.logException(methodName, CANT_GET_TOKEN + ' ' + result, /* status */ status, /* exception */ er);
+        this.errorHandler
+          .logException(methodName, CANT_GET_TOKEN + ' ' + result, /* status */ status, /* exception */ er);
       });
 
     if (requestResultCollector.getIsError()) {
@@ -210,13 +212,8 @@ export default class GetData {
     var authorizationSucces = false;
     var tokenUrl = oAuthToken.getTokenUrl();
     var requestPrams = oAuthToken.getRefreshTokenParams();
-    this.accessByAjax.requestWithParams(
-      'POST',
-      tokenUrl,
-      requestPrams,
-            /* isCache */ false,
-            /* token */ null
-    )
+    this.accessByAjax
+      .requestWithParams('POST', tokenUrl, requestPrams, /* isCache */ false, /* token */ null)
       .done(result => {
         authorizationSucces = oAuthToken.setSessionToken(result);
         authorizationToken = oAuthToken.getAuthorizationToken();
@@ -224,12 +221,8 @@ export default class GetData {
       })
       .fail((result, status, er) => {
         requestResultCollector.setIsError(true);
-        this.errorHandler.logException(
-          methodName,
-          CANT_GET_TOKEN + ' ' + result,
-                /* status */ status,
-                /* exception */ er
-        );
+        this.errorHandler
+          .logException(methodName, CANT_GET_TOKEN + ' ' + result, /* status */ status, /* exception */ er);
       });
 
     if (requestResultCollector.getIsError()) {
@@ -256,20 +249,10 @@ export default class GetData {
     authorizationToken: string
   ) {
     var ajax: any;
-    if (requestMethod == 'POST') {
-      ajax = this.accessByAjax.requestByPost(
-        serviceUrl,
-        jsonBody,
-        isCache,
-        /* token */ authorizationToken
-      );
+    if (requestMethod === 'POST') {
+      ajax = this.accessByAjax.requestByPost(serviceUrl, jsonBody, isCache, /* token */ authorizationToken);
     } else {
-      ajax = this.accessByAjax.requestByGet(
-        serviceUrl,
-        jsonBody,
-        isCache,
-        /* token */ authorizationToken
-      );
+      ajax = this.accessByAjax.requestByGet(serviceUrl, jsonBody, isCache, /* token */ authorizationToken);
     }
     ajax
       .done((result) => {
@@ -278,12 +261,8 @@ export default class GetData {
       })
       .fail((result, status, er) => {
         requestResultCollector.setIsError(true);
-        this.errorHandler.logException(
-          methodName,
-          /* message */ LOAD_DATA_ERROR + ' ' + result,
-          /* status */ status,
-          /* exception */ er
-        );
+        this.errorHandler
+          .logException(methodName, /* message */ LOAD_DATA_ERROR + ' ' + result, /* status */ status, /* exception */ er);
       });
     return requestResultCollector;
   }

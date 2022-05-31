@@ -34,13 +34,7 @@ export default class AjaxMethods {
     }
   }
 
-  requestWithBody(
-    method: string,
-    serviceUrl: string,
-    jsonBody,
-    isCache: boolean,
-    token: string
-  ) {
+  requestWithBody(method: string, serviceUrl: string, jsonBody, isCache: boolean, token: string) {
     const methodName = this.objectName + '.requestWithBody';
 
     if (token === null) {
@@ -69,13 +63,7 @@ export default class AjaxMethods {
     }
   }
 
-  requestWithParams(
-    method: string,
-    serviceUrl: string,
-    jsonParams,
-    isCache: boolean,
-    token: string
-  ) {
+  requestWithParams(method: string, serviceUrl: string, jsonParams, isCache: boolean, token: string) {
     const methodName = this.objectName + '.requestWithParams';
 
     if (token === null) {
