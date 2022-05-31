@@ -21,33 +21,31 @@ export default class ContextFactory {
    *
    * @param param0 parametry kontekstu
    */
-  createContext(
-    {
-      userName,
-      userFullName,
-      locale,
-      timeZone,
-      maxResults,
-      currentRole,
-      userRoles,
-      sourceOfRequest,
-      maxDepthResult,
-      decodeResult,
-      ignoreCaseHeaderInResponse
-    }: {
-      userName: string;
-      userFullName: string;
-      locale: string;
-      timeZone: string;
-      maxResults: number;
-      currentRole: string;
-      userRoles: string[];
-      sourceOfRequest: string;
-      maxDepthResult: number;
-      decodeResult: string;
-      ignoreCaseHeaderInResponse: boolean
-    }) {
-
+  createContext({
+    userName,
+    userFullName,
+    locale,
+    timeZone,
+    maxResults,
+    currentRole,
+    userRoles,
+    sourceOfRequest,
+    maxDepthResult,
+    decodeResult,
+    ignoreCaseHeaderInResponse,
+  }: {
+    userName: string;
+    userFullName: string;
+    locale: string;
+    timeZone: string;
+    maxResults: number;
+    currentRole: string;
+    userRoles: string[];
+    sourceOfRequest: string;
+    maxDepthResult: number;
+    decodeResult: string;
+    ignoreCaseHeaderInResponse: boolean;
+  }) {
     var trustedData = false;
 
     if (userFullName != null) {
@@ -101,7 +99,7 @@ export default class ContextFactory {
       cacheUsage: 'TO_USE',
       httpResponseCacheUsage: 'NONE',
       defaultLuceneSortClause: null,
-      viewDefinition: null
+      viewDefinition: null,
     };
   }
 }

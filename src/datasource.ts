@@ -81,11 +81,12 @@ export class HgdbDataSource extends DataSourceApi<MyQuery, HgdbDataSourceOptions
     };
     var serviceUrl = this.baseUrl + SERVICE_SERVICE_CONTEXT + '/CaseBusinessRest/echo';
     logInfo('--> testDatasource: serviceUrl: ' + serviceUrl);
-    return this.backendSrv.datasourceRequest({
+    return this.backendSrv.
+      datasourceRequest({
         url: this.url + serviceUrl,
         method: 'POST',
         data: jsonBody,
-    })
+      })
       .then((response) => {
         if (response.status === 200) {
           return {

@@ -8,13 +8,11 @@ export default class ResponseParser {
   }
 
   processDateMetricQueryResult(res: any) {
-
-    console.log("-->processQueryResult: $q", this.$q);
-    console.log("-->processQueryResult: res", res);
+    console.log('-->processQueryResult: $q', this.$q);
+    console.log('-->processQueryResult: res', res);
     return {
-      target: "target.target",
-      datapoints: []
+      target: 'target.target',
+      datapoints: [],
     };
   }
-
 }

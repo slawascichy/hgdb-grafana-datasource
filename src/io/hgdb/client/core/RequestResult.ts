@@ -1,12 +1,10 @@
 import ErrorHandler from './ErrorHandler';
 
 export default class RequestResult {
-
   protected objectName: string;
   protected result: any;
   protected errorHandler: ErrorHandler;
   protected isError: boolean;
-
 
   constructor(objectName: string) {
     this.objectName = objectName;
@@ -33,6 +31,4 @@ export default class RequestResult {
   getObject() {
     return null;
   }
-
 }
-
