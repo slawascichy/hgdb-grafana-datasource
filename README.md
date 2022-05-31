@@ -1,8 +1,8 @@
-# Grafana Data Source Plugin Template
+# MercuryDB 3.0 (Hgdb) Grafana Data Source Plugin
 
-[![Build](https://github.com/grafana/grafana-starter-datasource/workflows/CI/badge.svg)](https://github.com/grafana/grafana-starter-datasource/actions?query=workflow%3A%22CI%22)
+[![Build](https://github.com/slawascichy/hgdb-grafana-datasource/workflows/CI/badge.svg)](https://github.com/slawascichy/hgdb-grafana-datasource/actions?query=workflow%3A%22CI%22)
 
-This template is a starting point for building Grafana Data Source Plugins
+This is MercuryDB 3.0 (Hgdb) Grafana Data Source Plugin
 
 ## What is Grafana Data Source Plugin?
 
@@ -14,6 +14,7 @@ Grafana supports a wide range of data sources, including Prometheus, MySQL, and 
 
    ```bash
    yarn install
+   npm i @grafana/runtime
    ```
 
 2. Build plugin in development mode or run in watch mode
