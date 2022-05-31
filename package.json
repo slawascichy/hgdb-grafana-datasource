@@ -1,41 +1,29 @@
 {
-  "name": "grafana-typescript-template-datasource",
-  "version": "0.0.1",
-  "description": "TypeScript Template Data Source for Grafana. A starter template for creating data sources written in TypeScript for Grafana.",
+  "name": "sci-software-hgdb-datasource",
+  "version": "1.0.0",
+  "description": "MercuryDB 3.0 (HgDB) Datasource",
   "scripts": {
-    "build": "grunt",
-    "watch": "grunt watch",
-    "test": "./node_modules/karma/bin/karma start"
+    "build": "grafana-toolkit plugin:build",
+    "test": "grafana-toolkit plugin:test",
+    "dev": "grafana-toolkit plugin:dev",
+    "watch": "grafana-toolkit plugin:dev --watch",
+    "sign": "grafana-toolkit plugin:sign",
+    "start": "yarn watch"
   },
-  "author": "Grafana Labs",
-  "license": "Apache",
-  "dependencies": {
-    "lodash": "^4.17.4",
-    "moment": "^2.18.1",
-    "systemjs": "^0.19.47"
-  },
+  "author": "Sławomir 'slawas' Cichy",
+  "license": "Apache-2.0",
   "devDependencies": {
-    "@types/jquery": "^3.3.31",
-    "@types/lodash": "^4.14.74",
-    "@types/q": "^1.5.2",
-    "grafana-sdk-mocks" : "file:../node_modules/grafana-sdk-mocks",  
-    "grunt-contrib-clean": "^1.1.0",
-    "grunt-contrib-copy": "^1.0.0",
-    "grunt-contrib-watch": "^1.0.0",
-    "grunt-string-replace": "^1.3",
-    "grunt-ts": "^6.0.0-beta.22",
-    "karma": "^4.4.1",
-    "karma-chrome-launcher": "^2.2.0",
-    "karma-expect": "^1.1.3",
-    "karma-mocha": "^1.3.0",
-    "karma-phantomjs-launcher": "^1.0.4",
-    "karma-sinon": "^1.0.5",
-    "karma-systemjs": "^0.16.0",
-    "load-grunt-tasks": "^3.5.2",
-    "mocha": "^5.1.1",
-    "plugin-typescript": "^7.1.0",
-    "sinon": "^7.5.0",
-    "systemjs-plugin-css": "^0.1.35",
-    "typescript": "^3.7.2"
+    "@grafana/data": "latest",
+    "@grafana/toolkit": "latest",
+    "@grafana/ui": "latest",
+    "@testing-library/jest-dom": "5.4.0",
+    "@testing-library/react": "^10.0.2",
+    "@types/lodash": "latest"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "dependencies": {
+    "@grafana/runtime": "^8.5.3"
   }
 }

@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import q from 'q';
 
 export default class ResponseParser {
     constructor(private $q) {}

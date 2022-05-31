@@ -1,14 +1,9 @@
-import HgDBDatasource from './datasource';
-import {HgDBQueryCtrl} from './query_ctrl';
-import {HgDBConfigCtrl} from './config_ctrl';
+import { DataSourcePlugin } from '@grafana/data';
+import { HgdbDataSource } from './datasource';
+import { ConfigEditor } from './ConfigEditor';
+import { QueryEditor } from './QueryEditor';
+import { MyQuery, HgdbDataSourceOptions } from './types';
 
-class ChangeMyNameAnnotationsQueryCtrl {
-  static templateUrl = 'partials/annotations.editor.html';
-}
-
-export {
-  HgDBDatasource as Datasource,
-  HgDBQueryCtrl as QueryCtrl,
-  HgDBConfigCtrl as ConfigCtrl,
-  ChangeMyNameAnnotationsQueryCtrl as AnnotationsQueryCtrl,
-};
+export const plugin = new DataSourcePlugin<HgdbDataSource, MyQuery, HgdbDataSourceOptions>(HgdbDataSource)
+  .setConfigEditor(ConfigEditor)
+  .setQueryEditor(QueryEditor);

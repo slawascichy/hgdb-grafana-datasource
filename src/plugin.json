@@ -1,24 +1,36 @@
 {
+  "$schema": "https://raw.githubusercontent.com/grafana/grafana/master/docs/sources/developers/plugins/plugin.schema.json",
   "type": "datasource",
-  "name": "Mercury DB Grafana Datasource",
-  "id": "sci-hgdb-grafana-datasource",
-
+  "name": "MercuryDB 3.0 (HgDB)",
+  "id": "scisoftware-hgdb-datasource",
+  "metrics": true,
+  "logs": true,
   "info": {
-    "description": "Datasource for Mercury DB",
+    "description": "MercuryDB 3.0 (HgDB) Datasource",
     "author": {
-      "name": "Sławomir Cichy",
-      "url": "https://scisoftware.pl/"
+      "name": "Sławomir 'slawas' Cichy",
+      "url": "https://scisoftware.pl"
     },
-    "keywords": ["searchable", "key", "words"],
+    "keywords": [
+      "HgDB",
+      "MercuryDB"
+    ],
     "logos": {
       "small": "img/logo_48x48.png",
       "large": "img/logo_690x690.png"
     },
     "links": [
-      {"name": "Project site", "url": "https://github.com/slawascichy/hgdb-grafana-datasource"},
-      {"name": "Apache License", "url": "https://github.com/slawascichy/hgdb-grafana-datasource/blob/master/LICENSE"}
+      {
+        "name": "Website",
+        "url": "https://github.com/grafana/grafana-starter-datasource"
+      },
+      {
+        "name": "License",
+        "url": "https://github.com/grafana/grafana-starter-datasource/blob/master/LICENSE"
+      }
     ],
-    "version": "%VERSION%",
+    "screenshots": [],
+    "version": "0.0.1",
     "updated": "%TODAY%"
   },
   "routes": [
@@ -39,10 +51,7 @@
     }
   ],
   "dependencies": {
-    "grafanaVersion": "4.5.x",
-    "plugins": [ ]
-  },
-
-  "metrics": true,
-  "annotations": false
+    "grafanaDependency": ">=7.0.0",
+    "plugins": []
+  }
 }
