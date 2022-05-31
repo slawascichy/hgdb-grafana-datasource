@@ -77,7 +77,7 @@ export class HgdbDataSource extends DataSourceApi<MyQuery, HgdbDataSourceOptions
     });
     var jsonBody = {
       context: context,
-      someText: 'testDatasource'
+      someText: 'testDatasource',
     };
     var serviceUrl = this.baseUrl + SERVICE_SERVICE_CONTEXT + '/CaseBusinessRest/echo';
     logInfo('--> testDatasource: serviceUrl: ' + serviceUrl);
@@ -97,7 +97,7 @@ export class HgdbDataSource extends DataSourceApi<MyQuery, HgdbDataSourceOptions
         return {
           status: 'error',
           message: 'Returned http status code ' + response.status,
-          title: 'Error'
+          title: 'Error',
         };
       })
       .catch((error) => {
@@ -113,7 +113,7 @@ export class HgdbDataSource extends DataSourceApi<MyQuery, HgdbDataSourceOptions
         return {
           status: 'error',
           message: message,
-          title: 'Error'
+          title: 'Error',
         };
       });
     /* Koniec metody testDatasource */

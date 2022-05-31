@@ -2,12 +2,11 @@
  * Obsługa błędów
  */
 export default class ErrorHandler {
-
   constructor() {}
 
   /**
    * Logowanie wyjątku do konsoli
-   * 
+   *
    * @param methodName nazwa metody, z którego pochodzi wyjątek
    * @param message dodatkowy komunikat tekstowy
    * @param status status błędu

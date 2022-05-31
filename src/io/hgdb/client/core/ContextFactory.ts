@@ -1,6 +1,12 @@
-import { APP_NAME, APP_VERSION, SOURCE_OF_REQUEST, ROOT_CONTEXT_ID, DATE_LONG_FORMAT, DATE_SHORT_FORMAT } from './Constants';
+import {
+  APP_NAME,
+  APP_VERSION,
+  SOURCE_OF_REQUEST,
+  ROOT_CONTEXT_ID,
+  DATE_LONG_FORMAT,
+  DATE_SHORT_FORMAT,
+} from './Constants';
 export default class ContextFactory {
-
   private static instance: ContextFactory;
 
   static getInstance(): ContextFactory {
@@ -12,7 +18,7 @@ export default class ContextFactory {
 
   /**
    * Utworzenie obiektu kontekstu
-   * 
+   *
    * @param param0 parametry kontekstu
    */
   createContext(

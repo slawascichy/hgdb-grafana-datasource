@@ -20,7 +20,7 @@ export default class GetData {
     securityUrl: {
       tokenUrl: instanceSettings.jsonData.accesTokenURI,
       params: {
-        grant_type: "password",
+        grant_type: 'password',
         username: instanceSettings.jsonData.username,
         password: instanceSettings.jsonData.password,
         client_id: instanceSettings.jsonData.clientId,
@@ -61,7 +61,7 @@ export default class GetData {
         else {
           message = OTHER_ERROR;
         }
-        message = ERROR_IN_REQUEST + "'" + message + "'";
+        message = ERROR_IN_REQUEST + '\'' + message + '\'';
         this.errorHandler.logException(
           methodName,
           message,
@@ -71,14 +71,14 @@ export default class GetData {
         return;
       }
     }
-    if (result.errorCode != undefined && result.errorCode != "") {
+    if (result.errorCode != undefined && result.errorCode != '') {
       var errorCode = result.errorCode;
       var errorMessage = result.errorMessage;
-      message = "[" + errorCode + "] " + errorMessage;
+      message = '[' + errorCode + '] ' + errorMessage;
       this.errorHandler.logException(
         methodName,
         message,
-                /* status */ "error_in_result",
+                /* status */ 'error_in_result',
                 /* exception */ null);
       requestResult.setIsError(true);
       return;
@@ -86,10 +86,9 @@ export default class GetData {
     requestResult.setIsError(false);
   }
 
-
   loadData(requestResultCollector: RequestResult, serviceUrl, jsonBody, isCache, requestMethod) {
-    const methodName = this.objectName + ".loadData(" + serviceUrl + ")";
-    console.debug(methodName + ": START ");
+    const methodName = this.objectName + '.loadData(' + serviceUrl + ')';
+    console.debug(methodName + ': START ');
 
     if (requestResultCollector) {
       var oAuthToken: OAuthToken;
@@ -103,7 +102,7 @@ export default class GetData {
           jsonBody,
           isCache,
           requestMethod,
-                    /* authorizationToken */ null
+          /* authorizationToken */ null
         );
         /* brak autoryzacji OAuth - KONIEC */
       } else {
@@ -152,7 +151,7 @@ export default class GetData {
       this.errorHandler.logException(
         methodName,
         REQUEST_COLLECTOR_IS_EMPTY_ERROR,
-                /* status */ "load_data_error",
+                /* status */ 'load_data_error',
                 /* exception */ null
       );
     }
@@ -173,7 +172,7 @@ export default class GetData {
     var tokenUrl = oAuthToken.getTokenUrl();
     var tokenParams = oAuthToken.getParams();
     this.accessByAjax.requestWithParams(
-      "POST",
+      'POST',
       tokenUrl,
       tokenParams,
             /* isCache */ false,
@@ -188,7 +187,7 @@ export default class GetData {
         requestResultCollector.setIsError(true);
         this.errorHandler.logException(
           methodName,
-          CANT_GET_TOKEN + " " + result,
+          CANT_GET_TOKEN + ' ' + result,
                 /* status */ status,
                 /* exception */ er
         );
@@ -222,7 +221,7 @@ export default class GetData {
     var tokenUrl = oAuthToken.getTokenUrl();
     var requestPrams = oAuthToken.getRefreshTokenParams();
     this.accessByAjax.requestWithParams(
-      "POST",
+      'POST',
       tokenUrl,
       requestPrams,
             /* isCache */ false,
@@ -237,7 +236,7 @@ export default class GetData {
         requestResultCollector.setIsError(true);
         this.errorHandler.logException(
           methodName,
-          CANT_GET_TOKEN + " " + result,
+          CANT_GET_TOKEN + ' ' + result,
                 /* status */ status,
                 /* exception */ er
         );
@@ -291,7 +290,7 @@ export default class GetData {
         requestResultCollector.setIsError(true);
         this.errorHandler.logException(
           methodName,
-                /* message */ LOAD_DATA_ERROR + " " + result,
+                /* message */ LOAD_DATA_ERROR + ' ' + result,
                 /* status */status,
                 /* exception */ er
         );

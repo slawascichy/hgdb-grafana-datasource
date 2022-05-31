@@ -95,7 +95,7 @@ export default class AjaxMethods {
    *
    * @param serviceUrl adres, pod który wysyłane są dane
    * @param jsonBody dane wysyłane metodą POST w postaci JSON
-   * @param isCache czy ma być użyta pamięć podręczna? [true/false] 
+   * @param isCache czy ma być użyta pamięć podręczna? [true/false]
    * @param token token autoryzacyjny
    */
   requestByPost(serviceUrl, jsonBody, isCache, token) {
