@@ -2,7 +2,7 @@
 
 [![Build](https://github.com/slawascichy/hgdb-grafana-datasource/workflows/CI/badge.svg)](https://github.com/slawascichy/hgdb-grafana-datasource/actions?query=workflow%3A%22CI%22)
 
-This is MercuryDB 3.0 (Hgdb) Grafana Data Source Plugin
+This is [MercuryDB 3.0 (Hgdb)](https://hgdb.org) Grafana Data Source Plugin
 
 ## What is Grafana Data Source Plugin?
 
